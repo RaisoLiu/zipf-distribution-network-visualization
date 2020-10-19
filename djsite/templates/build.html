@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <title>Yui Search</title>
+        <link rel="icon" href="https://i.imgur.com/nAHqEUN.png" type="image/x-icon" />
+        <link rel="icon" href="https://i.imgur.com/nAHqEUN.png" type="image/x-icon"/> 
+        <meta charset="utf-8">
+        <meta name="generator" content="editplus">
+        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <style type="text/css">
+             #id_file{
+              /*background-color: #4CAF50;*/
+              border: none;
+              color: white;
+              padding: 10px 0px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+            }
+            
+            button {
+              background-color: #4CAF50;
+              border: none;
+              color: white;
+              padding: 10px 22px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+            }
+            .guide {
+                border: 1px solid LightCyan;
+                margin: 0 100px;
+                -webkit-box-ordinal-group: 101;
+                -ms-flex-order: 100;
+                order: 100;
+                color: #3f4f5b;
+                font-size: 10px;
+                height: 150px;
+                overflow: hidden;
+                background-color: LightCyan;
+                
+            }
+            .guide:hover{
+                height: auto;
+                min-height: 150px;
+            }
+            ul {                
+                height: 50px;
+                /*background-color: AliceBlue;*/
+                border: 1px solid LightCyan;
+                overflow: hidden;
+            }
+            ul:hover{
+                height: auto;
+                min-height: 50px;
+            }
+            li {                
+                -webkit-box-ordinal-group: 101;
+                -ms-flex-order: 100;
+                order: 100;
+                color: #3f4f5b;
+                margin: 10px 0;
+                display:inline;
+            }
+            li:first-child {
+                background-color: LightCyan;
+            }
+            .input-container {
+                width: 500px;
+                position: relative;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: reverse;
+                -ms-flex-flow: column-reverse;
+                flex-flow: column-reverse;
+                -webkit-box-align: start;
+                -ms-flex-align: start;
+                align-items: flex-start;
+                margin: 60px 30px;
+                left: 100px;
+            }
+            .input-container input {
+                -webkit-box-ordinal-group: 11;
+                order: 10;
+                -ms-flex-order: 10;
+                outline: none;
+                border: none;
+                width: 100%;
+                padding: 10px 0;
+                font-size: 20px;
+                border-bottom: 1px solid #d5d5d5;
+                text-indent: 10px;
+            }
+
+            .input-container input::-moz-placeholder {
+                opacity: 0;
+            }
+
+            .input-container input::-webkit-input-placeholder {
+                opacity: 0;
+            }
+
+            .input-container input:-ms-input-placeholder {
+                opacity: 0;
+            }
+
+            .input-container input, .input-container label {
+                transition: all 0.3s;
+            }
+
+            .input-container label {
+                -webkit-box-ordinal-group: 101;
+                -ms-flex-order: 100;
+                order: 100;
+                color: #3f4f5b;
+                -webkit-transform-origin: left bottom;
+                transform-origin: left bottom;
+                -webkit-transform: translate(10px, 40px);
+                transform: translate(0px, 40px); }
+
+            .input-container .bottom-line {
+                order: 2;
+                width: 0;
+                height: 2px;
+                background: #658db5;
+                transition: all 0.3s;
+            }
+
+            .input-container input:focus {
+                border-bottom-color: #fff;
+            }
+
+            .input-container input:focus ~ div,
+            .input-container input:not(:placeholder-shown) ~ div {
+                width: 100%;
+            }
+
+            .input-container input:focus + label,
+            .input-container input:not(:placeholder-shown) + label {
+                color: #52616c;
+                -webkit-transform: translate(10px) scale(0.9);
+                transform: translate(10px) scale(0.9);
+            }
+            .yui {
+                position: absolute;
+                left: 0;
+            }
+
+        </style>
+    </head>
+<body>
+
+
+    <div class="box">
+    <div class="yui">
+        <a href="/">
+        <img src="https://i.imgur.com/hnoelm2.jpg" width="100px">
+        </a>
+    </div>
+    <div class="input-container">
+ 
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        <button type="submit">Build</button>
+        
+    </form>
+    </div>
+    </div> 
+    <p> 常用key value: AbstractText, abstract, tweet_text </p>
+  
+{% if source_name %}
+    <h2>Before Porter’s algorithm</h2>
+    <img src="/media/freqDist2.png" alt="connect" style="max-height:400px">
+    <h2>After Porter’s algorithm</h2>
+    <img src="/media/freqDist.png" alt="connect" style="max-height:400px">
+    
+    <p>Target file name: {{source_name}}</p>
+    <p>Number of character: {{source_report.num_char}}</p>
+    <p>Number of word: {{source_report.num_word}}</p>
+    </br>
+    <p>Statistics:</p>
+    <p>Number of article: {{source_report.num_art}}</p>
+    <p>Number of different word: {{source_report.num_dword}}</p>
+    <p>Number of sentences: {{source_report.num_sentences}}</p>
+    
+{% else %}
+    <h2>Before Porter’s algorithm</h2>
+    <img src="/media/freqDist2.png" alt="IMG" style="max-height:400px">
+    <h2>After Porter’s algorithm</h2>
+    <img src="/media/freqDist.png" alt="IMG" style="max-height:400px">
+        
+    
+{% endif %}
